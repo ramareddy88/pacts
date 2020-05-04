@@ -1,0 +1,60 @@
+{
+  "provider": {
+    "name": "product-service"
+  },
+  "consumer": {
+    "name": "product-consumer-post"
+  },
+  "interactions": [
+    {
+      "description": "A request for new product",
+      "request": {
+        "method": "POST",
+        "path": "/product",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Ginger",
+          "id": "3"
+        },
+        "matchingRules": {
+          "body": {
+            "$.id": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.name": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "response": {
+        "status": 201
+      },
+      "providerStates": [
+        {
+          "name": "create product 3"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "4.0.10"
+    }
+  }
+}
